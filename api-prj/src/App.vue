@@ -30,3 +30,16 @@
   color: #42b983;
 }
 </style>
+
+<script>
+export default {
+  data(){
+    return{ 
+  solcastKey: "crVoSZfC4uXoXrwRWmf1BDFGpTnb5Jot",
+  opencageKey: 'c7c536d0d6264b3583a7036fdd58e50a', 
+  }
+ 
+  },
+  
+}
+</script>
