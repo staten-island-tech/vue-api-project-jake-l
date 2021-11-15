@@ -26,7 +26,16 @@ return{
   }, 
   methods: {
     returnValue(){
-        console.log('clicked');
+      const latitudeValue =this.LatValue;
+      const longitudeValue =this.LongValue;
+        if( latitudeValue === ''|| longitudeValue===''){
+          alert('gimme a number');
+        }
+        else{
+        console.log(latitudeValue);
+        console.log(longitudeValue);
+        }
+  
 
     },
   },
