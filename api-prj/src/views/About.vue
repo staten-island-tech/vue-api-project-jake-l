@@ -36,8 +36,8 @@ return{
   }, 
   methods: {
     returnValue(){
-      const latitudeValue =this.LatValue;
-      const longitudeValue =this.LongValue;
+      const latitudeValue = this.LatValue;
+      const longitudeValue = this.LongValue;
         if( latitudeValue === ''|| longitudeValue===''){
           alert('gimme a number');
         }
@@ -51,7 +51,7 @@ return{
   },
   computed: {
     returnAddress(){
-      
+//working on this. maybe add a method that calls this?
     }
   },
 }
