@@ -1,9 +1,16 @@
 <template>
 <div class="input-div">
-  <span>Latitude:</span>
+ <!--  <span>Latitude:</span>
   <input v-model='LatValue' type="number" class="latitude-value" >
   <span>Longitude:</span>
-  <input v-model='LongValue' type="number" class="longitude-value">
+  <input v-model='LongValue' type="number" class="longitude-value"> -->
+  
+  <span>City:</span>
+  <input v-model='cityName' type="text" class="address-city">
+  <span>State:</span>
+  <input v-model='stateName' type="text" class="address-state">
+  <span>country:</span>
+  <input v-model='countryName' type="text" class="address-country">
   <button v-on:click = 'returnValue' class="submit-button">Submit</button>
 </div>
 </template>
@@ -18,7 +25,10 @@ input{
 export default {
   data(){
 return{
-  test1: 'data',
+  cityName:'',
+  stateName:'', 
+  countryName:'',
+
   LatValue: '',
   LongValue:'',
 
@@ -38,6 +48,11 @@ return{
   
 
     },
+  },
+  computed: {
+    returnAddress(){
+      
+    }
   },
 }
 </script>
