@@ -24,6 +24,8 @@ input{
 </style>
 
 <script>
+import axios from 'axios';
+
 export default {
   data(){
 return{
@@ -35,9 +37,32 @@ return{
   latValue:'',
   lngValue:'',
 
+  /* key: "c7c536d0d6264b3583a7036fdd58e50a", 
+  address: "Fort Worth, Texas, United States", */
+
 
 }
   }, 
+  created() {
+        axios
+          .get(this.geocodeCallRequest)  // Does a get request
+          .then(response => {
+            
+            this.latValue = response.data.results[0].geometry.lat; 
+            this.lngValue = response.data.results[0].geometry.lng;
+            
+            const latitude = this.latValue; 
+            const longitude = this.lngValue;
+            
+            console.log(latitude);
+            console.log(longitude);
+            // updates and logs longitude and latitude
+          })
+          .catch(error => {
+            console.log('There was an error:', error.response) 
+            // Logs out the error
+          })
+      },
   methods: {
     returnValue(){
       /* const latitudeValue = this.LatValue;
@@ -59,15 +84,42 @@ return{
       console.log(address)
     },
     changeNameLaterButThisGetsForecasts(){
-      console.log('still working on this'      )
+      console.log('still working on this')
     },
   },
   computed: {
      returnAddress(){
      return this.cityName + ',' + this.stateName + ',' + this.countryName 
-    } 
+    }, 
+    geocodeCallRequest(){
+      return 'https://api.opencagedata.com/geocode/v1/json?q=' + this.returnAddress + '&key=' + this.key
+    }
   },
 }
+
+
+
+/* other api call
+    const key2 = 'crVoSZfC4uXoXrwRWmf1BDFGpTnb5Jot';
+    const longitude = '-74.1153967';
+    const latitude = '40.5685441';
+    const hours ='168' ;
+    const test2 = async function () {
+      try {
+        const response2 = await fetch(
+          `https://api.weather.gov/gridpoints/TOP/31,80/forecast`
+        );
+        const data2 = await response2.json();
+        console.log(data2.properties.periods);
+        console.log('successful 2');
+      } catch (error2) {
+        console.log(error2);
+        alert("something wrong");
+      }
+    }; 
+
+*/
+
 </script>
 
 
