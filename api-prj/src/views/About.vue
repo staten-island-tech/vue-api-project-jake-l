@@ -33,37 +33,20 @@ return{
   stateName:'', 
   countryName:'',
 
-  address: '',
   latValue:'',
   lngValue:'',
 
   key: "c7c536d0d6264b3583a7036fdd58e50a", 
-  /* 
-  address: "Fort Worth, Texas, United States", */
+  key2: "crVoSZfC4uXoXrwRWmf1BDFGpTnb5Jot",
+  hours: "168", 
+   
 
 
 }
   }, 
  created() {
-        axios
-          .get(this.geocodeCallRequest)  // Does a get request
-          .then(response => {
-            
-            this.latValue = response.data.results[0].geometry.lat; 
-            this.lngValue = response.data.results[0].geometry.lng;
-            
-            const latitude = this.latValue; 
-            const longitude = this.lngValue;
-            
-            console.log(latitude);
-            console.log(longitude);
-           
-            // updates and logs longitude and latitude
-          })
-          .catch(error => {
-            console.log('There was an error:', error.response) 
-            // Logs out the error
-          })
+   
+
       }, 
   methods: {
     returnValue(){
@@ -77,14 +60,33 @@ return{
         }
         else{
           this.locationGrabber();
-           console.log(this.geocodeCallRequest)
-        }
+           }
       
 
     },
     locationGrabber(){
       const address = this.returnAddress;
-      console.log(address)
+      console.log(address);
+         axios
+          .get(this.geocodeCallRequest)  // Does a get request
+          .then(response => {
+            
+            this.latValue = response.data.results[0].geometry.lat; 
+            this.lngValue = response.data.results[0].geometry.lng;
+            
+            const latitude = this.latValue; 
+            const longitude = this.lngValue;
+            
+            console.log(latitude);
+            console.log(longitude);
+            this.changeNameLaterButThisGetsForecasts();
+           
+            // updates and logs longitude and latitude
+          })
+          .catch(error => {
+            console.log('There was an error:', error.response) 
+            // Logs out the error
+          })
     },
     changeNameLaterButThisGetsForecasts(){
       console.log('still working on this')
