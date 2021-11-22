@@ -37,13 +37,14 @@ return{
   latValue:'',
   lngValue:'',
 
-  /* key: "c7c536d0d6264b3583a7036fdd58e50a", 
+  key: "c7c536d0d6264b3583a7036fdd58e50a", 
+  /* 
   address: "Fort Worth, Texas, United States", */
 
 
 }
   }, 
-  created() {
+ created() {
         axios
           .get(this.geocodeCallRequest)  // Does a get request
           .then(response => {
@@ -56,13 +57,14 @@ return{
             
             console.log(latitude);
             console.log(longitude);
+           
             // updates and logs longitude and latitude
           })
           .catch(error => {
             console.log('There was an error:', error.response) 
             // Logs out the error
           })
-      },
+      }, 
   methods: {
     returnValue(){
       /* const latitudeValue = this.LatValue;
@@ -75,6 +77,7 @@ return{
         }
         else{
           this.locationGrabber();
+           console.log(this.geocodeCallRequest)
         }
       
 
@@ -89,11 +92,11 @@ return{
   },
   computed: {
      returnAddress(){
-     return this.cityName + ',' + this.stateName + ',' + this.countryName 
+     return this.cityName + ',' + this.stateName + ',' + this.countryName ;
     }, 
     geocodeCallRequest(){
-      return 'https://api.opencagedata.com/geocode/v1/json?q=' + this.returnAddress + '&key=' + this.key
-    }
+      return 'https://api.opencagedata.com/geocode/v1/json?q=' + this.returnAddress + '&key=' + this.key;
+    },
   },
 }
 
