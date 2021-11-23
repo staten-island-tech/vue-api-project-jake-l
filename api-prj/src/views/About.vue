@@ -39,7 +39,10 @@ return{
   key: "c7c536d0d6264b3583a7036fdd58e50a", 
   key2: "crVoSZfC4uXoXrwRWmf1BDFGpTnb5Jot",
   hours: "168", 
-   
+
+  xValue:'', 
+  yValue:'', 
+   IdValue:'', 
 
 
 }
@@ -92,9 +95,13 @@ return{
       axios 
         .get(this.gridIdCallRequest)
         .then(response => {
-          const gridID = response.data.properties.gridId;
-          const xCoordinate = response.data.properties.gridX;
-          const yCoordinate = response.data.properties.gridY;
+          this.xValue  = response.data.properties.gridX;
+          this.yValue = response.data.properties.gridY;
+          this.IdValue = response.data.properties.gridId;
+
+          const gridID = this.IdValue;
+          const xCoordinate = this.xValue ;
+          const yCoordinate = this.yValue;
           console.log(gridID);
           console.log(xCoordinate);
           console.log(yCoordinate);
@@ -105,7 +112,7 @@ return{
             // Logs out the error
           })
           axios
-         .get('https://api.weather.gov/gridpoints/TOP/31,80/forecast')
+         .get(this.forecastCallRequest)
         .then(response =>{
           console.log(response.data.properties.periods);
           console.log('forecast')
@@ -126,6 +133,9 @@ return{
     gridIdCallRequest(){
       return 'https://api.weather.gov/points/' + this.latValue + ','+ this.lngValue;
     }, 
+    forecastCallRequest(){
+    return 'https://api.weather.gov/gridpoints/TOP/31,80/forecast';
+    },
 
   },
 }
