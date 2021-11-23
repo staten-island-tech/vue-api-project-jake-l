@@ -100,6 +100,20 @@ return{
           console.log(yCoordinate);
           console.log('working');
         })
+        .catch(error => {
+            console.log('There was an error:', error.response) 
+            // Logs out the error
+          })
+          axios
+         .get('https://api.weather.gov/gridpoints/TOP/31,80/forecast')
+        .then(response =>{
+          console.log(response.data.properties.periods);
+          console.log('forecast')
+        }) 
+        .catch(error => {
+            console.log('There was an error:', error.response); 
+            // Logs out the error
+          })
     },
   },
   computed: {
