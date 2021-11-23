@@ -89,7 +89,17 @@ return{
           })
     },
     changeNameLaterButThisGetsForecasts(){
-      console.log('still working on this')
+      axios 
+        .get(this.gridIdCallRequest)
+        .then(response => {
+          const gridID = response.data.properties.gridId;
+          const xCoordinate = response.data.properties.gridX;
+          const yCoordinate = response.data.properties.gridY;
+          console.log(gridID);
+          console.log(xCoordinate);
+          console.log(yCoordinate);
+          console.log('working');
+        })
     },
   },
   computed: {
@@ -99,6 +109,10 @@ return{
     geocodeCallRequest(){
       return 'https://api.opencagedata.com/geocode/v1/json?q=' + this.returnAddress + '&key=' + this.key;
     },
+    gridIdCallRequest(){
+      return 'https://api.weather.gov/points/' + this.latValue + ','+ this.lngValue;
+    }, 
+
   },
 }
 
