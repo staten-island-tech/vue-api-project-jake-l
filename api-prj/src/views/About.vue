@@ -12,6 +12,12 @@
   
 </div>
   <button v-on:click = 'returnValue' class="submit-button">Submit</button>
+  <div class="weather-data-box">
+    <h2 class="weather-title">day of the week</h2>
+    <h3 class="temperature-value">50 °F</h3>
+    <h3 class="weather-status">partly cloudy</h3>
+    <h4 class="time-frame">10-5pm</h4>
+  </div>
 </div>
 
 
@@ -20,6 +26,13 @@
 <style>
 input{
   border-radius: 5px;
+}
+
+.weather-data-box{
+  background-color:red;
+  width: 15vw;
+  height: 45vh;
+  border-radius: 13px;
 }
 </style>
 
