@@ -13,10 +13,10 @@
 </div>
   <button v-on:click = 'returnValue' class="submit-button">Submit</button>
   <div class="weather-data-box">
-    <h2 class="weather-title">day of the week</h2>
-    <h3 class="temperature-value">50 °F</h3>
-    <h3 class="weather-status">partly cloudy</h3>
-    <h4 class="time-frame">10-5pm</h4>
+    <h2 class="weather-title" >{{event.name}}</h2>
+    <h3 class="temperature-value">{{event.temperature}} °F</h3>
+    <h3 class="weather-status">{{event.shortForecast}}</h3>
+    <h4 class="wind-speed-data">{{event.windSpeed}}</h4>
   </div>
 </div>
 
@@ -40,6 +40,7 @@ input{
 import axios from 'axios';
 
 export default {
+
   data(){
 return{
   cityName:'',
@@ -56,6 +57,7 @@ return{
   xValue:'', 
   yValue:'', 
    IdValue:'', 
+   event: {},
 
 
 }
@@ -119,15 +121,20 @@ return{
           console.log(xCoordinate);
           console.log(yCoordinate);
           console.log('working');
+          this.actuallyGettingForecasts();
         })
         .catch(error => {
             console.log('There was an error:', error.response) 
             // Logs out the error
           })
-          axios
-         .get(this.forecastCallRequest)
+       
+    },
+    actuallyGettingForecasts(){
+ axios
+         .get('https://api.weather.gov/gridpoints/OKX/28,27/forecast')
         .then(response =>{
-          console.log(response.data.properties.periods);
+          this.event = response.data.properties.periods[0];
+          console.log(response.data.properties.periods[0]);
           console.log('forecast')
         }) 
         .catch(error => {
@@ -135,6 +142,7 @@ return{
             // Logs out the error
           })
     },
+      
   },
   computed: {
      returnAddress(){
@@ -147,7 +155,7 @@ return{
       return 'https://api.weather.gov/points/' + this.latValue + ','+ this.lngValue;
     }, 
     forecastCallRequest(){
-    return 'https://api.weather.gov/gridpoints/TOP/31,80/forecast';
+    return 'https://api.weather.gov/gridpoints/' + this.IdValue + '/' + this.  xValue + ',' + this.yValue + '/forecast';
     },
 
   },
