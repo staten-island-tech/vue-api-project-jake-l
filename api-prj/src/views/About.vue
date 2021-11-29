@@ -12,11 +12,11 @@
   
 </div>
   <button v-on:click = 'returnValue' class="submit-button">Submit</button>
-  <div class="weather-data-box">
-    <h2 class="weather-title" >{{event.name}}</h2>
-    <h3 class="temperature-value">{{event.temperature}} °F</h3>
-    <h3 class="weather-status">{{event.shortForecast}}</h3>
-    <h4 class="wind-speed-data">{{event.windSpeed}}</h4>
+  <div v-for = "day in days" :key="day" class="weather-data-box">
+    <h2 class="weather-title" >{{day.name}}</h2>
+    <h3 class="temperature-value">{{day.temperature}} °F</h3>
+    <h3 class="weather-status">{{day.shortForecast}}</h3>
+    <h4 class="wind-speed-data">{{day.windSpeed}}</h4>
   </div>
 </div>
 
@@ -57,7 +57,7 @@ return{
   xValue:'', 
   yValue:'', 
    IdValue:'', 
-   event: {},
+   days: {},
 
 
 }
@@ -83,6 +83,7 @@ return{
 
     },
     locationGrabber(){
+      this.days = {};
       const address = this.returnAddress;
       console.log(address);
          axios
@@ -131,10 +132,10 @@ return{
     },
     actuallyGettingForecasts(){
  axios
-         .get('https://api.weather.gov/gridpoints/OKX/28,27/forecast')
+         .get(this.forecastCallRequest)
         .then(response =>{
-          this.event = response.data.properties.periods[0];
-          console.log(response.data.properties.periods[0]);
+          this.days = response.data.properties.periods;
+          console.log(response.data.properties.periods);
           console.log('forecast')
         }) 
         .catch(error => {
